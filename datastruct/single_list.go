@@ -8,14 +8,17 @@ package datastruct
 
 import "log"
 
+// 链表数据类型
+type ElementStruct interface{}
+
 type SingleList struct {
-	Data int
+	Data ElementStruct
 	Next *SingleList
 }
 
 // 创建链表结构实例
 func NewSingleList() *SingleList {
-	return &SingleList{Data: 0, Next: nil}
+	return &SingleList{Data: nil, Next: nil}
 }
 
 // 返回第一个节点
@@ -42,7 +45,7 @@ func (n *SingleList) GetLastSingleList() *SingleList {
 }
 
 // 在链表的第i个位置前插入一个元素，复杂度为o(n)
-func (n *SingleList) InsertData(i int, d int) bool {
+func (n *SingleList) InsertData(i int, d ElementStruct) bool {
 	h := n
 	j := 1
 	// 查找第i-1节点
@@ -91,12 +94,12 @@ func (n *SingleList) Traverse() {
 	h := n
 	for h.Next != nil {
 		h = h.Next
-		log.Printf("The Data of SingleList is:%d\n", h.Data)
+		log.Printf("The Data of SingleList is:%v\n", h.Data)
 	}
 }
 
 // 获取链表中的第i个元素，复杂度为o(n)
-func (n *SingleList) GetData(i int) (int, bool) {
+func (n *SingleList) GetData(i int) (ElementStruct, bool) {
 	// 位置有效性判断
 	if i < 0 || i > n.GetLen() {
 		return -1, false
