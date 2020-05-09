@@ -10,3 +10,4 @@
     
 # 2. 单元测试
      go test -v -run TestInsert single_list_test.go single_list.go
+     go test -v -run TestInsert
