@@ -6,13 +6,16 @@
 
 package datastruct
 
-import "log"
+import (
+	"errors"
+	"log"
+)
 
 // 链表数据类型
-type ElementStruct interface{}
+type ElementObject interface{}
 
 type SingleList struct {
-	Data ElementStruct
+	Data ElementObject
 	Next *SingleList
 }
 
@@ -45,7 +48,7 @@ func (n *SingleList) GetLastSingleList() *SingleList {
 }
 
 // 在链表的第i个位置前插入一个元素，复杂度为o(n)
-func (n *SingleList) InsertData(i int, d ElementStruct) bool {
+func (n *SingleList) InsertData(i int, d ElementObject) bool {
 	h := n
 	j := 1
 	// 查找第i-1节点
@@ -99,7 +102,7 @@ func (n *SingleList) Traverse() {
 }
 
 // 获取链表中的第i个元素，复杂度为o(n)
-func (n *SingleList) GetData(i int) (ElementStruct, bool) {
+func (n *SingleList) GetData(i int) (ElementObject, bool) {
 	// 位置有效性判断
 	if i < 0 || i > n.GetLen() {
 		return -1, false
@@ -148,7 +151,7 @@ func (n *SingleList) GetLen() int {
 }
 
 // 删除链表中第i个节点
-func (n *SingleList) Delete(i int) bool {
+func (n *SingleList) Delete(i int) error {
 	h := n
 	j := 1
 	// 查找第i-1个节点
@@ -158,11 +161,21 @@ func (n *SingleList) Delete(i int) bool {
 	}
 
 	if h == nil || j > i {
-		log.Fatalf("Failed to delete the [%d]-th node\n", i)
-		return false
+		return errors.New("Failed to delete the node")
 	}
 
 	h.Next = h.Next.Next
-	return true
+	return nil
 }
 
+// 删除链表中最后一个节点
+func (n *SingleList) DeleteLast() error {
+	return n.Delete(n.GetLen())
+}
+
+func (n *SingleList) DataValue() (ElementObject, error) {
+	if n == nil {
+		return nil, errors.New("List is null")
+	}
+	return n.Data, nil
+}

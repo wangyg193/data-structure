@@ -63,9 +63,10 @@ func TestDeleteList(t *testing.T) {
 	n.InsertData(1, 100)
 	n.InsertData(1, 10)
 	n.InsertData(1, 1)
+	t.Logf("the len is:%d\n",n.GetLen())
 	t.Logf("before delete...")
 	n.Traverse()
-	n.Delete(1)
+	n.Delete(4)
 	t.Logf("after delete...")
 	n.Traverse()
 }
