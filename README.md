@@ -2,11 +2,14 @@
     datastruct
     ---single_list.go
     ---double_list.go
+    ---queue.go
     
 ## 1.1 单链表
     代码文件：single_list.go
 ## 1.2 双向链表
     代码文件：double_list.go
+## 1.3 队列
+    代码文件：queue.go
     
 # 2. 单元测试
      go test -v -run TestInsert single_list_test.go single_list.go
